@@ -3,7 +3,6 @@ package com.sggcrm.service;
 
 import java.util.Map;
 
-import com.sggcrm.commons.bean.DataGridResult;
 import com.sggcrm.pojo.SalesChances;
 
 
@@ -17,5 +16,8 @@ import com.sggcrm.pojo.SalesChances;
  */
 public interface SalesChancesService {
 	
-	
+	void Dispatch(SalesChances saleschance) throws Exception;
+
+	Map<String, Object> getSalesChancesById(Integer id, Map<String, Object> map);
+
 }

@@ -4,6 +4,7 @@ import com.sggcrm.pojo.SalesChances;
 import java.util.List;
 
 public interface SalesChancesMapper {
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(SalesChances record);
@@ -12,5 +13,5 @@ public interface SalesChancesMapper {
 
     List<SalesChances> selectAll();
 
-    int updateByPrimaryKey(SalesChances record);
+    int update(SalesChances salesChance);
 }

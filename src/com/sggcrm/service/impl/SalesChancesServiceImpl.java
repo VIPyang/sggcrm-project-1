@@ -1,10 +1,5 @@
 package com.sggcrm.service.impl;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -13,15 +8,9 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.Page;
-import com.sggcrm.commons.bean.DataGridResult;
-import com.sggcrm.commons.utils.PageUtils;
-import com.sggcrm.custom.exception.CreateSalesChanceException;
 import com.sggcrm.mapper.SalesChancesMapper;
 import com.sggcrm.mapper.UsersMapper;
 import com.sggcrm.pojo.SalesChances;
-import com.sggcrm.pojo.SalesChancesExample;
-import com.sggcrm.pojo.SalesChancesExample.Criteria;
 import com.sggcrm.service.SalesChancesService;
 
 
@@ -50,6 +39,45 @@ public class SalesChancesServiceImpl implements SalesChancesService {
 	private Properties configurationProperties;
 
 	
+	/**
+	 * @Title: Dispatch
+	 * @Description: 完成销售机会指派
+	 * @author 刘山禾
+	 * @CreateDate 2016年3月29日 上午11:45:19
+	 */
+	@Override
+	public void Dispatch(SalesChances salesChance) throws Exception {
+
+		if (null == salesChance || null == salesChance.getId()) {
+			throw new IllegalArgumentException("参数不能为null");
+		}
+		chancesMapper.update(salesChance);
+	}
+
+	/**
+	 * @Title: getSalesChancesById
+	 * @Description: 根据ID查询一个实体类
+	 * @author 刘山禾
+	 * @CreateDate  2016年3月29日 下午1:12:18
+	 */
+	@Override
+	public Map<String, Object> getSalesChancesById(Integer id, Map<String, Object> map) {
+		
+		//根据ID查询chance对象，放入map
+		SalesChances chance = chancesMapper.selectByPrimaryKey(id);
+		map.put("chance",chance);
+		//创建人名称,放入map
+		map.put("creater", usersMapper.selectByPrimaryKey(chance.getCreatedUserId()));
+		
+		if(null == chance.getDesigneeId()){
+			//查询所有的、可供指派的用户，放入map
+			map.put("canDesign", usersMapper.selectAll());
+		}else{
+			//指派人名称,放入map
+			map.put("designer", chancesMapper.selectByPrimaryKey(chance.getDesigneeId()));
+		}
+		return map;
+	}
 	
 	
 }

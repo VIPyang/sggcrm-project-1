@@ -1,5 +1,9 @@
 package com.sggcrm.service;
 
+import java.util.List;
+
+import com.sggcrm.pojo.SalesPlan;
+
 /**
  * 
  * @ClassName:	PlanService
@@ -9,5 +13,14 @@ package com.sggcrm.service;
  *
  */
 public interface SalesPlanService {
+	
+	String delete(Integer id);
+
+	String update(SalesPlan salesPlan);
+
+	String save(SalesPlan salesPlan);
+
+	List<SalesPlan> getPlansById(Integer chanceId);
+	
 	
 }

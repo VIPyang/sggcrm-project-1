@@ -1,23 +1,10 @@
 package com.sggcrm.handler;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sggcrm.commons.utils.LoginUtils;
-import com.sggcrm.custom.exception.AccountNotFoundException;
-import com.sggcrm.custom.exception.IllegalPassWordException;
-import com.sggcrm.custom.exception.UserException;
-import com.sggcrm.pojo.Users;
 import com.sggcrm.service.UserService;
-import com.sggcrm.service.impl.UserServiceImpl.UserMsg;
 
 
 /**

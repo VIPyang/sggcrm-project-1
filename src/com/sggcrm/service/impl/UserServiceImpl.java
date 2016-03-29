@@ -2,9 +2,6 @@ package com.sggcrm.service.impl;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.sggcrm.commons.utils.SessionServerUtils;
 import com.sggcrm.mapper.UsersMapper;
-import com.sggcrm.pojo.Users;
-import com.sggcrm.pojo.UsersExample;
-import com.sggcrm.pojo.UsersExample.Criteria;
 import com.sggcrm.service.UserService;
 
 
