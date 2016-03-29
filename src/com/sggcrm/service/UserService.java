@@ -25,10 +25,7 @@ public interface UserService {
 	// 用户存在具备登录权限
 	public final static int EXIST_ENABLE = 1;
 
-	Users getOneByUserName(String username) throws Exception;
-
-	Map<Integer, Users> getOneEnableByUserName(String username)
-			throws Exception;
+	
 	
 	UserMsg getUserMsg();
 	

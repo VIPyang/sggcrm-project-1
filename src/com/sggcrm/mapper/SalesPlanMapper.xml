@@ -8,96 +8,9 @@
     <result column="TODO" property="todo" jdbcType="VARCHAR" />
     <result column="CHANCE_ID" property="chanceId" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    ID, PLAN_DATE, PLAN_RESULT, TODO, CHANCE_ID
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sggcrm.pojo.SalesPlanExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sales_plan
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from sales_plan
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sales_plan
     where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.sggcrm.pojo.SalesPlanExample" >
-    delete from sales_plan
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.sggcrm.pojo.SalesPlan" >
     insert into sales_plan (ID, PLAN_DATE, PLAN_RESULT, 
@@ -105,101 +18,6 @@
     values (#{id,jdbcType=INTEGER}, #{planDate,jdbcType=TIMESTAMP}, #{planResult,jdbcType=VARCHAR}, 
       #{todo,jdbcType=VARCHAR}, #{chanceId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.sggcrm.pojo.SalesPlan" >
-    insert into sales_plan
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="planDate != null" >
-        PLAN_DATE,
-      </if>
-      <if test="planResult != null" >
-        PLAN_RESULT,
-      </if>
-      <if test="todo != null" >
-        TODO,
-      </if>
-      <if test="chanceId != null" >
-        CHANCE_ID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="planDate != null" >
-        #{planDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="planResult != null" >
-        #{planResult,jdbcType=VARCHAR},
-      </if>
-      <if test="todo != null" >
-        #{todo,jdbcType=VARCHAR},
-      </if>
-      <if test="chanceId != null" >
-        #{chanceId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.sggcrm.pojo.SalesPlanExample" resultType="java.lang.Integer" >
-    select count(*) from sales_plan
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update sales_plan
-    <set >
-      <if test="record.id != null" >
-        ID = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.planDate != null" >
-        PLAN_DATE = #{record.planDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.planResult != null" >
-        PLAN_RESULT = #{record.planResult,jdbcType=VARCHAR},
-      </if>
-      <if test="record.todo != null" >
-        TODO = #{record.todo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.chanceId != null" >
-        CHANCE_ID = #{record.chanceId,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update sales_plan
-    set ID = #{record.id,jdbcType=INTEGER},
-      PLAN_DATE = #{record.planDate,jdbcType=TIMESTAMP},
-      PLAN_RESULT = #{record.planResult,jdbcType=VARCHAR},
-      TODO = #{record.todo,jdbcType=VARCHAR},
-      CHANCE_ID = #{record.chanceId,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sggcrm.pojo.SalesPlan" >
-    update sales_plan
-    <set >
-      <if test="planDate != null" >
-        PLAN_DATE = #{planDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="planResult != null" >
-        PLAN_RESULT = #{planResult,jdbcType=VARCHAR},
-      </if>
-      <if test="todo != null" >
-        TODO = #{todo,jdbcType=VARCHAR},
-      </if>
-      <if test="chanceId != null" >
-        CHANCE_ID = #{chanceId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.sggcrm.pojo.SalesPlan" >
     update sales_plan
     set PLAN_DATE = #{planDate,jdbcType=TIMESTAMP},
@@ -208,4 +26,13 @@
       CHANCE_ID = #{chanceId,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select ID, PLAN_DATE, PLAN_RESULT, TODO, CHANCE_ID
+    from sales_plan
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, PLAN_DATE, PLAN_RESULT, TODO, CHANCE_ID
+    from sales_plan
+  </select>
 </mapper>

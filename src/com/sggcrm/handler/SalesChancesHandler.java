@@ -51,16 +51,12 @@ public class SalesChancesHandler {
 			ParametersBean<?> pb) throws Exception {
 
 		ModelAndView mav = new ModelAndView("chance/list");
-		Map<String, Object> map = pb.getMap();
-		DataGridResult dataResult = chancesService.getChanceListByStatus(
-				status, pageNum, pageSize, map);
-		mav.addObject("dataResult", dataResult);
 		return mav;
 	}
 
 	/**
 	 * 
-	 * @Title: create
+	 * @Title: input
 	 * @Description: 跳转到新增页面 /chance/input.jsp <br>
 	 * @param: createUserId
 	 * @param: map
@@ -75,60 +71,6 @@ public class SalesChancesHandler {
 		return "chance/input";
 	}
 
-	/**
-	 * 
-	 * @Title: createSubmit
-	 * @Description: 执行新增记录操作,重定向到 chance/list <br>
-	 * @return String
-	 * @throws Exception
-	 * @Date:2016年3月29日上午3:20:03
-	 * @author: 和鹏
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String save(SalesChances chance, RedirectAttributes attributes)
-			throws Exception {
-		chancesService.save(chance);
-		attributes.addFlashAttribute("message", "新建销售机会成功!");
-		return "redirect:chance/list";
-	}
-
-	/**
-	 * 
-	 * @Title: delete
-	 * @Description: 移除一条记录
-	 * @param id
-	 * @param attributes
-	 * @throws Exception
-	 * @Date:2016年3月29日上午4:35:14
-	 * @author: 和鹏
-	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String delete(@PathVariable("id") Integer id,
-			RedirectAttributes attributes) throws Exception {
-		chancesService.delete(id);
-		attributes.addFlashAttribute("message", "删除成功!");
-		return "redirect:/chance/list";
-	}
-	
-	/**
-	 * 
-	 * @Title: update
-	 * @Description: 跟新一条记录
-	 * @param id
-	 * @param chance
-	 * @param attributes
-	 * @throws Exception   
-	 * @Date:2016年3月29日上午4:39:21
-	 * @author:	和鹏
-	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String update(@PathVariable("id") Integer id, SalesChances chance,
-			RedirectAttributes attributes) throws Exception {
-		// 为 id 赋值.
-		chance.setId(id);
-		chancesService.update(chance);
-		attributes.addFlashAttribute("message", "修改机会成功!");
-		return "redirect:/chance/list";
-	}
+		
 
 }

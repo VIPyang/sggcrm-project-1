@@ -112,11 +112,13 @@
 							<fmt:formatDate value="${chance.createDate }" pattern="yyyy-MM-dd"/>
 						</td>
 						<td class="list_data_op">
-							<img onclick="window.location.href='${ctp }/chance/dispatch?id=${chance.id}'" 
-								title="指派" src="${ctp }/static/images/bt_linkman.gif" class="op_button" />
-							<img onclick="window.location.href='${ctp }/chance/create?id=${chance.id}'" 
-								title="编辑" src="${ctp }/static/images/bt_edit.gif"
-								class="op_button" />
+							<img onclick="window.location.href='${ctp}/chance/dispatch?id=150'" 
+							title="指派" src="${ctp}/static/images/bt_linkman.gif" class="op_button" />
+							
+							<img onclick="window.location.href='${ctp}/chance/${chance.id }'" 
+							title="编辑" src="${ctp}/static/images/bt_edit.gif"
+							class="op_button" />
+							
 							<input type="hidden" value="${chance.id }"/>
 							<img title="删除" src="${ctp}/static/images/bt_del.gif" class="delete" />
 							<input type="hidden" value="${chance.custName }"/>

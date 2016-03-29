@@ -38,58 +38,7 @@ public class UserServiceImpl implements UserService {
 	
 	private UserMsg userMsg;
 
-	/**
-	 * 
-	 * @Title: getOneByUserName
-	 * @Description: 根据用户名查询用户记录
-	 * @param: username
-	 * @return: Users
-	 * @throwsException
-	 * @Date:2016年3月26日下午2:46:42
-	 */
-	@Override
-	public Users getOneByUserName(String username) throws Exception {
-		UsersExample useExample = new UsersExample();
-		Criteria criteria = useExample.createCriteria();
-		criteria.andNameEqualTo(username);
-		List<Users> list = usersMapper.selectByExample(useExample);
-		if (null != list && list.size() == 1) {
-			return list.get(0);
-		}
-		return null;
-	}
-
-	/**
-	 * 
-	 * <p>Title: getOneEnableByUserName</p>
-	 * <p>Description: 根据给定的用户名查找用户记录,并确定该用户是否具备登录权限</p>
-	 * @param username
-	 * @return 返回Map,Map的键为int类型,值为Users类型;<br>
-	 * 			表示用户的状态:-1 表示用户名不存在,值为null;<br>
-	 * 			0 表示用户名存在但是不允许登录,值不为null<br>
-	 * 			1 表示用户名存在且允许登录,值不为null<br>
-	 * @throws Exception
-	 * @author:	和鹏
-	 * @see com.sggcrm.service.UserService#getOneEnableByUserName(java.lang.String)
-	 */
-	@Override
-	public Map<Integer, Users> getOneEnableByUserName(String username)
-			throws Exception {
-		Map<Integer, Users> map = new HashMap<Integer, Users>();
-		Users user = getOneByUserName(username);
-		if (null != user) {
-			// 1 enable 0 disable
-			Integer isEnabled = user.getEnabled();
-			if (null != isEnabled && isEnabled == 1) {
-				map.put(UserService.EXIST_ENABLE, user);
-			} else if (isEnabled == 0) {
-				map.put(UserService.EXIST_DISABLE, user);
-			}
-		} else {
-			map.put(UserService.NOT_EXIST, null);
-		}
-		return map;
-	}
+	
 	
 	/**
 	 * 

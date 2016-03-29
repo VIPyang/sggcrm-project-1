@@ -17,97 +17,9 @@
     <result column="CREATED_ID" property="createdId" jdbcType="INTEGER" />
     <result column="CUSTOMER_ID" property="customerId" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    ID, ALLOT_DATE, CREATE_DATE, DEAL_DATE, DEAL_RESULT, SATISFY, SERVICE_DEAL, SERVICE_REQUEST, 
-    SERVICE_STATE, SERVICE_TITLE, SERVICE_TYPE, ALLOT_ID, CREATED_ID, CUSTOMER_ID
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sggcrm.pojo.CustomerServicesExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from customer_services
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from customer_services
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from customer_services
     where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.sggcrm.pojo.CustomerServicesExample" >
-    delete from customer_services
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.sggcrm.pojo.CustomerServices" >
     insert into customer_services (ID, ALLOT_DATE, CREATE_DATE, 
@@ -121,218 +33,6 @@
       #{serviceTitle,jdbcType=VARCHAR}, #{serviceType,jdbcType=VARCHAR}, #{allotId,jdbcType=INTEGER}, 
       #{createdId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.sggcrm.pojo.CustomerServices" >
-    insert into customer_services
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="allotDate != null" >
-        ALLOT_DATE,
-      </if>
-      <if test="createDate != null" >
-        CREATE_DATE,
-      </if>
-      <if test="dealDate != null" >
-        DEAL_DATE,
-      </if>
-      <if test="dealResult != null" >
-        DEAL_RESULT,
-      </if>
-      <if test="satisfy != null" >
-        SATISFY,
-      </if>
-      <if test="serviceDeal != null" >
-        SERVICE_DEAL,
-      </if>
-      <if test="serviceRequest != null" >
-        SERVICE_REQUEST,
-      </if>
-      <if test="serviceState != null" >
-        SERVICE_STATE,
-      </if>
-      <if test="serviceTitle != null" >
-        SERVICE_TITLE,
-      </if>
-      <if test="serviceType != null" >
-        SERVICE_TYPE,
-      </if>
-      <if test="allotId != null" >
-        ALLOT_ID,
-      </if>
-      <if test="createdId != null" >
-        CREATED_ID,
-      </if>
-      <if test="customerId != null" >
-        CUSTOMER_ID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="allotDate != null" >
-        #{allotDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dealDate != null" >
-        #{dealDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dealResult != null" >
-        #{dealResult,jdbcType=VARCHAR},
-      </if>
-      <if test="satisfy != null" >
-        #{satisfy,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceDeal != null" >
-        #{serviceDeal,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceRequest != null" >
-        #{serviceRequest,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceState != null" >
-        #{serviceState,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceTitle != null" >
-        #{serviceTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceType != null" >
-        #{serviceType,jdbcType=VARCHAR},
-      </if>
-      <if test="allotId != null" >
-        #{allotId,jdbcType=INTEGER},
-      </if>
-      <if test="createdId != null" >
-        #{createdId,jdbcType=INTEGER},
-      </if>
-      <if test="customerId != null" >
-        #{customerId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.sggcrm.pojo.CustomerServicesExample" resultType="java.lang.Integer" >
-    select count(*) from customer_services
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update customer_services
-    <set >
-      <if test="record.id != null" >
-        ID = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.allotDate != null" >
-        ALLOT_DATE = #{record.allotDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createDate != null" >
-        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.dealDate != null" >
-        DEAL_DATE = #{record.dealDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.dealResult != null" >
-        DEAL_RESULT = #{record.dealResult,jdbcType=VARCHAR},
-      </if>
-      <if test="record.satisfy != null" >
-        SATISFY = #{record.satisfy,jdbcType=VARCHAR},
-      </if>
-      <if test="record.serviceDeal != null" >
-        SERVICE_DEAL = #{record.serviceDeal,jdbcType=VARCHAR},
-      </if>
-      <if test="record.serviceRequest != null" >
-        SERVICE_REQUEST = #{record.serviceRequest,jdbcType=VARCHAR},
-      </if>
-      <if test="record.serviceState != null" >
-        SERVICE_STATE = #{record.serviceState,jdbcType=VARCHAR},
-      </if>
-      <if test="record.serviceTitle != null" >
-        SERVICE_TITLE = #{record.serviceTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="record.serviceType != null" >
-        SERVICE_TYPE = #{record.serviceType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.allotId != null" >
-        ALLOT_ID = #{record.allotId,jdbcType=INTEGER},
-      </if>
-      <if test="record.createdId != null" >
-        CREATED_ID = #{record.createdId,jdbcType=INTEGER},
-      </if>
-      <if test="record.customerId != null" >
-        CUSTOMER_ID = #{record.customerId,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update customer_services
-    set ID = #{record.id,jdbcType=INTEGER},
-      ALLOT_DATE = #{record.allotDate,jdbcType=TIMESTAMP},
-      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
-      DEAL_DATE = #{record.dealDate,jdbcType=TIMESTAMP},
-      DEAL_RESULT = #{record.dealResult,jdbcType=VARCHAR},
-      SATISFY = #{record.satisfy,jdbcType=VARCHAR},
-      SERVICE_DEAL = #{record.serviceDeal,jdbcType=VARCHAR},
-      SERVICE_REQUEST = #{record.serviceRequest,jdbcType=VARCHAR},
-      SERVICE_STATE = #{record.serviceState,jdbcType=VARCHAR},
-      SERVICE_TITLE = #{record.serviceTitle,jdbcType=VARCHAR},
-      SERVICE_TYPE = #{record.serviceType,jdbcType=VARCHAR},
-      ALLOT_ID = #{record.allotId,jdbcType=INTEGER},
-      CREATED_ID = #{record.createdId,jdbcType=INTEGER},
-      CUSTOMER_ID = #{record.customerId,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sggcrm.pojo.CustomerServices" >
-    update customer_services
-    <set >
-      <if test="allotDate != null" >
-        ALLOT_DATE = #{allotDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createDate != null" >
-        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dealDate != null" >
-        DEAL_DATE = #{dealDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dealResult != null" >
-        DEAL_RESULT = #{dealResult,jdbcType=VARCHAR},
-      </if>
-      <if test="satisfy != null" >
-        SATISFY = #{satisfy,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceDeal != null" >
-        SERVICE_DEAL = #{serviceDeal,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceRequest != null" >
-        SERVICE_REQUEST = #{serviceRequest,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceState != null" >
-        SERVICE_STATE = #{serviceState,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceTitle != null" >
-        SERVICE_TITLE = #{serviceTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceType != null" >
-        SERVICE_TYPE = #{serviceType,jdbcType=VARCHAR},
-      </if>
-      <if test="allotId != null" >
-        ALLOT_ID = #{allotId,jdbcType=INTEGER},
-      </if>
-      <if test="createdId != null" >
-        CREATED_ID = #{createdId,jdbcType=INTEGER},
-      </if>
-      <if test="customerId != null" >
-        CUSTOMER_ID = #{customerId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.sggcrm.pojo.CustomerServices" >
     update customer_services
     set ALLOT_DATE = #{allotDate,jdbcType=TIMESTAMP},
@@ -350,4 +50,17 @@
       CUSTOMER_ID = #{customerId,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select ID, ALLOT_DATE, CREATE_DATE, DEAL_DATE, DEAL_RESULT, SATISFY, SERVICE_DEAL, 
+    SERVICE_REQUEST, SERVICE_STATE, SERVICE_TITLE, SERVICE_TYPE, ALLOT_ID, CREATED_ID, 
+    CUSTOMER_ID
+    from customer_services
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, ALLOT_DATE, CREATE_DATE, DEAL_DATE, DEAL_RESULT, SATISFY, SERVICE_DEAL, 
+    SERVICE_REQUEST, SERVICE_STATE, SERVICE_TITLE, SERVICE_TYPE, ALLOT_ID, CREATED_ID, 
+    CUSTOMER_ID
+    from customer_services
+  </select>
 </mapper>

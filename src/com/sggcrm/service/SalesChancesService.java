@@ -17,12 +17,5 @@ import com.sggcrm.pojo.SalesChances;
  */
 public interface SalesChancesService {
 	
-	DataGridResult getChanceListByStatus(Integer status,Integer pageNum, Integer pageSize,Map<String,Object> map) throws Exception;
-	
-	void save(SalesChances salesChances) throws Exception;
-	
-	void delete(Integer id) throws Exception;
-	
-	void update(SalesChances salesChances) throws Exception;
 	
 }
